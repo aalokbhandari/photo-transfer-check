@@ -1,0 +1,11 @@
+{
+  "name": "photo-transfer-check",
+  "version": "1.0.0",
+  "description": "Check photos and videos copied off a phone before deleting them from the phone.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Aalok Bhandari",
+  "scripts": {
+    "test": "node --test"
+  }
+}

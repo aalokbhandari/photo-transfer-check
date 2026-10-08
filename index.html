@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo transfer check: is it safe to delete photos from your phone?</title>
+<meta name="description" content="Check photos and videos you copied from your phone before you delete them. Finds files that were cut short or got the wrong extension. Runs in your browser, nothing is uploaded.">
+<style>
+  :root { color-scheme: light dark; --ok: #1a7f37; --bad: #c62828; --warn: #a15c00; --line: #8884; }
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .muted { opacity: .7; }
+  .pick { display: inline-block; padding: 12px 18px; border: 2px solid currentColor; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 8px 8px 8px 0; }
+  .pick input { display: none; }
+  #verdict { font-size: 1.3rem; font-weight: 700; padding: 14px 16px; border-radius: 8px; margin: 20px 0 8px; display: none; }
+  #verdict.ok { display: block; background: #1a7f3722; color: var(--ok); }
+  #verdict.bad { display: block; background: #c6282822; color: var(--bad); }
+  details { border-top: 1px solid var(--line); padding: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; margin-top: 8px; }
+  td, th { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; word-break: break-all; }
+  button { font: inherit; padding: 6px 12px; margin: 8px 8px 0 0; cursor: pointer; }
+  code { font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Photo transfer check</h1>
+<p class="muted">Copied photos off your phone? Check them here before you delete anything from the phone.
+Everything runs in your browser. No file is uploaded.</p>
+
+<label class="pick">Choose the folder you copied<input type="file" id="folder" webkitdirectory multiple></label>
+<label class="pick">or choose files<input type="file" id="files" multiple></label>
+
+<p id="progress" class="muted"></p>
+<div id="verdict"></div>
+<div id="results"></div>
+
+<details>
+  <summary>What does it check?</summary>
+  <p>For every photo and video it reads the first bytes to see what the file really is (JPEG, HEIC, PNG, MOV, MP4 and a few more),
+  then checks the file is whole. A video or HEIC photo is a set of boxes, and each box says how long it is. If a box needs more
+  bytes than the file has, the copy stopped early. A JPEG or PNG must end with its end marker.</p>
+  <p>A cut-short file can still show a normal thumbnail, and some even open with a grey or green block where the picture ran out.
+  That is why looking at previews is not enough.</p>
+</details>
+<details>
+  <summary>How to copy from an iPhone so this doesn't happen</summary>
+  <ol>
+    <li>On the iPhone: Settings → Photos → Transfer to Mac or PC → <b>Keep Originals</b>.</li>
+    <li>Copy a few hundred at a time and keep the phone unlocked.</li>
+    <li>Run this check. Only delete from the phone when it says it's safe.</li>
+  </ol>
+</details>
+<p class="muted">Made by <a href="https://www.aalokbhandari.com.np">Aalok Bhandari</a> ·
+<a href="https://github.com/aalokbhandari/photo-transfer-check">source</a> · MIT license</p>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
